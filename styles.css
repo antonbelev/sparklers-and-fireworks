@@ -1,0 +1,413 @@
+/* Reset and Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow: hidden;
+    background: #000;
+    color: #fff;
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Canvas */
+#canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+    background: radial-gradient(ellipse at bottom, #1a0a2e 0%, #000 70%);
+}
+
+/* UI Toggle Button - Always Visible */
+.ui-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 2000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.ui-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
+
+.ui-toggle.ui-hidden {
+    opacity: 0.5;
+}
+
+/* Main UI Container */
+#main-ui {
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#main-ui.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Countdown Section */
+#countdown-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    z-index: 100;
+    text-align: center;
+    pointer-events: none;
+}
+
+.countdown-container {
+    padding: 2rem 3rem;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.timezone-info {
+    font-size: 0.9rem;
+    color: #ffd700;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+.countdown-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.time-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 70px;
+}
+
+.time-value {
+    font-size: 3.5rem;
+    font-weight: 200;
+    color: #fff;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+
+.time-label {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 0.5rem;
+}
+
+.time-separator {
+    font-size: 2.5rem;
+    font-weight: 200;
+    color: rgba(255, 215, 0, 0.6);
+    padding-bottom: 1.5rem;
+}
+
+.countdown-message {
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    color: #ffd700;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.countdown-message #target-year {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+    margin-left: 0.3rem;
+    text-shadow:
+        0 0 10px rgba(255, 215, 0, 1),
+        0 0 30px rgba(255, 215, 0, 0.6);
+}
+
+/* Action Buttons */
+#action-buttons {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1rem;
+    z-index: 100;
+}
+
+.action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 1rem 1.5rem;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 90px;
+}
+
+.action-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.action-btn:active {
+    transform: translateY(0);
+}
+
+.action-btn.active {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: rgba(255, 215, 0, 0.6);
+}
+
+.btn-icon {
+    font-size: 1.8rem;
+}
+
+.btn-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
+/* Settings */
+#settings {
+    position: fixed;
+    bottom: 2rem;
+    right: 1rem;
+    z-index: 100;
+}
+
+.setting-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    font-size: 1.3rem;
+    transition: all 0.2s ease;
+}
+
+.setting-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.setting-btn.sound-off {
+    opacity: 0.5;
+}
+
+/* Credits */
+#credits {
+    position: fixed;
+    bottom: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.4);
+    text-align: center;
+    z-index: 50;
+}
+
+#credits a {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+#credits a:hover {
+    color: rgba(255, 215, 0, 0.8);
+}
+
+/* Celebration Overlay */
+.hidden {
+    display: none !important;
+}
+
+#celebration-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+    pointer-events: none;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.celebration-content {
+    text-align: center;
+    animation: scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.celebration-title {
+    font-size: 3rem;
+    font-weight: 300;
+    color: #ffd700;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    text-shadow:
+        0 0 30px rgba(255, 215, 0, 1),
+        0 0 60px rgba(255, 215, 0, 0.5);
+    margin-bottom: 0.5rem;
+}
+
+.celebration-year {
+    font-size: 8rem;
+    font-weight: 100;
+    color: #fff;
+    text-shadow:
+        0 0 40px rgba(255, 215, 0, 1),
+        0 0 80px rgba(255, 215, 0, 0.6),
+        0 0 120px rgba(255, 100, 0, 0.4);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+    .ui-toggle {
+        width: 44px;
+        height: 44px;
+        font-size: 1.3rem;
+    }
+
+    .countdown-container {
+        padding: 1.5rem 2rem;
+        margin: 0 1rem;
+    }
+
+    .time-value {
+        font-size: 2.5rem;
+    }
+
+    .time-unit {
+        min-width: 55px;
+    }
+
+    .time-separator {
+        font-size: 2rem;
+        padding-bottom: 1rem;
+    }
+
+    .countdown-message {
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+    }
+
+    .countdown-message #target-year {
+        font-size: 1.1rem;
+    }
+
+    #action-buttons {
+        bottom: 1.5rem;
+        gap: 0.75rem;
+    }
+
+    .action-btn {
+        padding: 0.8rem 1rem;
+        min-width: 75px;
+        border-radius: 12px;
+    }
+
+    .btn-icon {
+        font-size: 1.5rem;
+    }
+
+    .btn-label {
+        font-size: 0.6rem;
+    }
+
+    #settings {
+        bottom: 1.5rem;
+        right: 0.75rem;
+    }
+
+    .setting-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 1.1rem;
+    }
+
+    .celebration-title {
+        font-size: 1.8rem;
+        letter-spacing: 4px;
+    }
+
+    .celebration-year {
+        font-size: 5rem;
+    }
+}
+
+/* Landscape Mobile */
+@media (max-height: 500px) {
+    #countdown-overlay {
+        transform: translate(-50%, -55%);
+    }
+
+    .countdown-container {
+        padding: 1rem 2rem;
+    }
+
+    .time-value {
+        font-size: 2rem;
+    }
+
+    .countdown-message {
+        margin-top: 0.75rem;
+    }
+
+    #action-buttons {
+        bottom: 1rem;
+    }
+}

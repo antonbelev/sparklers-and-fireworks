@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="Celebrate with beautiful digital sparklers and fireworks - eco-friendly and noise-free!">
+    <title>Sparklers & Fireworks - Digital Celebration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+
+    <!-- Simple Hide/Show UI Toggle -->
+    <button id="toggle-ui" class="ui-toggle" aria-label="Toggle UI">
+        <span class="toggle-icon">👁</span>
+    </button>
+
+    <!-- Main UI Container (can be hidden) -->
+    <div id="main-ui">
+        <!-- Countdown Timer -->
+        <div id="countdown-overlay">
+            <div class="countdown-container">
+                <div class="timezone-info" id="location-name">Europe/London</div>
+                <div class="countdown-display">
+                    <div class="time-unit">
+                        <span class="time-value" id="hours">00</span>
+                        <span class="time-label">Hours</span>
+                    </div>
+                    <span class="time-separator">:</span>
+                    <div class="time-unit">
+                        <span class="time-value" id="minutes">00</span>
+                        <span class="time-label">Minutes</span>
+                    </div>
+                    <span class="time-separator">:</span>
+                    <div class="time-unit">
+                        <span class="time-value" id="seconds">00</span>
+                        <span class="time-label">Seconds</span>
+                    </div>
+                </div>
+                <div class="countdown-message">Until New Year <span id="target-year">2026</span></div>
+            </div>
+        </div>
+
+        <!-- Simple Action Buttons -->
+        <div id="action-buttons">
+            <button id="sparkler-btn" class="action-btn" aria-label="Light Sparklers">
+                <span class="btn-icon">✨</span>
+                <span class="btn-label">Sparklers</span>
+            </button>
+            <button id="fireworks-btn" class="action-btn" aria-label="Launch Fireworks">
+                <span class="btn-icon">🎆</span>
+                <span class="btn-label">Fireworks</span>
+            </button>
+            <button id="auto-btn" class="action-btn" aria-label="Auto Show">
+                <span class="btn-icon">🎉</span>
+                <span class="btn-label">Auto Show</span>
+            </button>
+        </div>
+
+        <!-- Minimal Settings (Sound only) -->
+        <div id="settings">
+            <button id="sound-btn" class="setting-btn sound-on" aria-label="Toggle Sound">
+                🔊
+            </button>
+        </div>
+
+        <!-- Credits -->
+        <div id="credits">
+            Created by <a href="https://belev.me/" target="_blank" rel="noopener">Anton @ belev.me</a>
+            · Audio from <a href="https://pixabay.com/" target="_blank" rel="noopener">Pixabay</a>
+        </div>
+    </div>
+
+    <!-- New Year Celebration Overlay -->
+    <div id="celebration-overlay" class="hidden">
+        <div class="celebration-content">
+            <h1 class="celebration-title">Happy New Year</h1>
+            <h2 class="celebration-year" id="celebration-year">2026</h2>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
