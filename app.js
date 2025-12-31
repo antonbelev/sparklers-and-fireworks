@@ -12,7 +12,7 @@ window.addEventListener('resize', () => {
 });
 
 // Global state
-let mode = 'sparkler';
+let mode = 'fireworks'; // Default to fireworks so tapping launches them
 let fireworkType = 'all';
 let soundEnabled = true;
 let musicEnabled = false;
@@ -663,8 +663,11 @@ function handleStart(x, y) {
     lastY = y;
     lastSparkleTime = Date.now();
 
-    if (mode === 'fireworks') {
+    // Launch firework on tap/click (unless in sparkler drawing mode)
+    if (mode === 'fireworks' || mode === 'auto') {
         launchFirework(x);
+    } else if (mode === 'sparkler') {
+        createSparkles(x, y);
     }
 }
 
@@ -717,24 +720,24 @@ canvas.addEventListener('mouseleave', handleEnd);
 // Touch events
 canvas.addEventListener('touchstart', (e) => {
     e.preventDefault();
-    Array.from(e.touches).forEach(touch => {
+    const touch = e.touches[0];
+    if (touch) {
         handleStart(touch.clientX, touch.clientY);
-    });
-});
+    }
+}, { passive: false });
 
 canvas.addEventListener('touchmove', (e) => {
     e.preventDefault();
-    Array.from(e.touches).forEach(touch => {
+    const touch = e.touches[0];
+    if (touch) {
         handleMove(touch.clientX, touch.clientY);
-    });
-});
+    }
+}, { passive: false });
 
 canvas.addEventListener('touchend', (e) => {
     e.preventDefault();
-    if (e.touches.length === 0) {
-        handleEnd();
-    }
-});
+    handleEnd();
+}, { passive: false });
 
 // UI Controls
 // UI Toggle - Hide/Show all UI elements
@@ -752,10 +755,28 @@ document.getElementById('toggle-ui').addEventListener('click', () => {
 
 // Sound toggle
 document.getElementById('sound-btn').addEventListener('click', () => {
+    initAudio(); // Ensure audio is initialized
     const btn = document.getElementById('sound-btn');
     soundEnabled = !soundEnabled;
     btn.textContent = soundEnabled ? '🔊' : '🔇';
     btn.classList.toggle('sound-off', !soundEnabled);
+
+    // Stop all currently playing audio files when muting
+    if (!soundEnabled) {
+        Object.values(audioFiles).forEach(audio => {
+            if (Array.isArray(audio)) {
+                audio.forEach(a => {
+                    if (a && !a.paused) {
+                        a.pause();
+                        a.currentTime = 0;
+                    }
+                });
+            } else if (audio && !audio.paused) {
+                audio.pause();
+                audio.currentTime = 0;
+            }
+        });
+    }
 });
 
 // Helper to update active button state
